@@ -1,0 +1,65 @@
+﻿@model X.PagedList.IPagedList<GerenciadorDespesas.Models.Despesas>
+@using X.PagedList.Mvc.Core
+@using X.PagedList.Mvc.Common
+
+@{
+    ViewData["Title"] = "Despesas cadastradas";
+}
+
+
+<div class="tabela">
+    <div class="container">
+        <p class="btnNovo">
+            <a asp-action="Create" class="btnNovo btn-outline-primary">Nova Despesa</a>
+        </p>
+        <div class="tabelaPrincipal">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>
+                            Meses
+                        </th>
+                        <th>
+                            Tipo da Despesas
+                        </th>
+                        <th>
+                            Valor
+                        </th>
+                        <th>
+                            Ação
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Meses.Nome)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.TipoDespesas.Nome)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Valor)
+                            </td>
+                            <td>
+                                <a asp-action="Edit" asp-route-id="@item.DespesaId">Atualizar</a> |
+
+                                <a asp-action="Delete" asp-route-id="@item.DespesaId">Excluir</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@Html.PagedListPager(Model, pagina => Url.Action("Index", "Despesas", new { pagina }), new PagedListRenderOptionsBase
+{
+    LiElementClasses = new string[] { "page-item" },
+    PgedClasses = new string[] { "paged-link" }
+
+})
+
