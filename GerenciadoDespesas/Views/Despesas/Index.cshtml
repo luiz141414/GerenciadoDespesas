@@ -1,6 +1,6 @@
 ﻿@model X.PagedList.IPagedList<GerenciadorDespesas.Models.Despesas>
 @using X.PagedList.Mvc.Core
-@using X.PagedList.Mvc.Common
+@using X.PagedList.Web.Common
 
 @{
     ViewData["Title"] = "Despesas cadastradas";
@@ -10,7 +10,7 @@
 <div class="tabela">
     <div class="container">
         <p class="btnNovo">
-            <a asp-action="Create" class="btnNovo btn-outline-primary">Nova Despesa</a>
+            <a asp-action="Create" class="btn btn-outline-primary btn-sm">Nova Despesa</a>
         </p>
         <div class="tabelaPrincipal">
             <table class="table table-hover">
@@ -56,10 +56,10 @@
     </div>
 </div>
 
-@Html.PagedListPager(Model, pagina => Url.Action("Index", "Despesas", new { pagina }), new PagedListRenderOptionsBase
+@Html.PagedListPager(Model, pagina => Url.Action("Index", "Despesas", new { pagina }), new PagedListRenderOptions
 {
     LiElementClasses = new string[] { "page-item" },
-    PgedClasses = new string[] { "paged-link" }
+    PageClasses = new string[] { "paged-link" }
 
 })
 
